@@ -2,12 +2,12 @@ import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
-import { AudioContext } from "standardized-audio-context";
+// import { AudioContext } from "standardized-audio-context";
 
 function App() {
   const [answer, setAnswer] = useState("");
   const [input, setInput] = useState("");
-  const audioContext = new AudioContext();
+  // const audioContext = new AudioContext();
   const handleClick = async () => {
     const response = await fetch("http://localhost:3001/fetch-answer", {
       method: "POST",
@@ -27,11 +27,15 @@ function App() {
     });
 
     const audioData = await audioReponse.arrayBuffer();
-    const audioBuffer = await audioContext.decodeAudioData(audioData);
-    const sourceNode = audioContext.createBufferSource();
-    sourceNode.buffer = audioBuffer;
-    sourceNode.connect(audioContext.destination);
-    sourceNode.start();
+    const audio = new Audio();
+    audio.src = URL.createObjectURL(new Blob([audioData]));
+    audio.play();
+    // code below uses audiocontext libraby
+    // const audioBuffer = await audioContext.decodeAudioData(audioData);
+    // const sourceNode = audioContext.createBufferSource();
+    // sourceNode.buffer = audioBuffer;
+    // sourceNode.connect(audioContext.destination);
+    // sourceNode.start();
     setInput("");
     setAnswer(answer);
   };
