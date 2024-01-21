@@ -1,10 +1,40 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import reactLogo from "./assets/react.svg";
+import viteLogo from "/vite.svg";
+import "./App.css";
+import { AudioContext } from "standardized-audio-context";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [answer, setAnswer] = useState("");
+  const [input, setInput] = useState("");
+  const audioContext = new AudioContext();
+  const handleClick = async () => {
+    const response = await fetch("http://localhost:3001/fetch-answer", {
+      method: "POST",
+      body: JSON.stringify({ input }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const completion = await response.json();
+    const answer = completion.choices[0].message.content;
+    const audioReponse = await fetch("http://localhost:3001/fetch-audio", {
+      method: "POST",
+      body: JSON.stringify({ input: answer }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const audioData = await audioReponse.arrayBuffer();
+    const audioBuffer = await audioContext.decodeAudioData(audioData);
+    const sourceNode = audioContext.createBufferSource();
+    sourceNode.buffer = audioBuffer;
+    sourceNode.connect(audioContext.destination);
+    sourceNode.start();
+    setInput("");
+    setAnswer(answer);
+  };
 
   return (
     <>
@@ -18,18 +48,15 @@ function App() {
       </div>
       <h1>Vite + React</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+        <input value={input} onChange={(e) => setInput(e.target.value)}></input>
+        <button onClick={() => handleClick()}>Submit</button>
+        <p>{answer}</p>
       </div>
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
