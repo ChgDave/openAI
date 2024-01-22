@@ -79,12 +79,6 @@ app.get("/test", async (req, res) => {
   try {
     console.log("This is a test");
     res.json({ message: "success" }).status(200);
-    // const response = await openai.audio.speech.create({
-    //   model: "tts-1",
-    //   voice: "alloy",
-    //   input: completion.choices[0].message.content,
-    // });
-    // res.json({ completion, response });
   } catch (e) {
     console.log(e);
   }
