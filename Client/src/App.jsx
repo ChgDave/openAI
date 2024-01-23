@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
@@ -7,6 +7,7 @@ import "./App.css";
 function App() {
   const [answer, setAnswer] = useState("");
   const [input, setInput] = useState("");
+  const inputRef = useRef(null);
   // const audioContext = new AudioContext();
   const handleClick = async () => {
     const response = await fetch("http://localhost:3001/fetch-answer", {
@@ -40,6 +41,13 @@ function App() {
     setAnswer(answer);
   };
 
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      // Trigger button click event when Enter key is pressed
+      inputRef.current.click();
+    }
+  };
+
   return (
     <>
       <div>
@@ -52,8 +60,14 @@ function App() {
       </div>
       <h1>Open AI</h1>
       <div className="card">
-        <input value={input} onChange={(e) => setInput(e.target.value)}></input>
-        <button onClick={() => handleClick()}>Submit</button>
+        <input
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          onKeyPress={handleKeyPress}
+        ></input>
+        <button ref={inputRef} onClick={() => handleClick()}>
+          Submit
+        </button>
         <p>{answer}</p>
       </div>
       <p className="read-the-docs">
