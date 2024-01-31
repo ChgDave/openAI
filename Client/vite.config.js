@@ -1,6 +1,7 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
+// why does the proxy not working??
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
