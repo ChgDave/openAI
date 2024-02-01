@@ -1,5 +1,5 @@
-import { useState, useRef } from "react";
-import reactLogo from "./assets/react.svg";
+import { useState, useRef, useEffect } from "react";
+import Typewriter from "typewriter-effect/dist/core";
 import AILogo from "/AI.png";
 import "./App.css";
 // import { AudioContext } from "standardized-audio-context";
@@ -8,7 +8,8 @@ function App() {
   const [answer, setAnswer] = useState("");
   const [input, setInput] = useState("");
   const inputRef = useRef(null);
-  // const audioContext = new AudioContext();
+  const answerDisplay = useRef(null);
+
   const handleClick = async () => {
     const response = await fetch("http://localhost:3001/fetch-answer", {
       method: "POST",
@@ -39,6 +40,13 @@ function App() {
     // sourceNode.start();
     setInput("");
     setAnswer(answer);
+
+    const typewriter = new Typewriter(answerDisplay.current, {
+      strings: answer,
+      autoStart: true,
+      loop: false,
+      delay: 50,
+    });
   };
 
   const handleKeyPress = (event) => {
@@ -53,7 +61,7 @@ function App() {
       <div>
         <img src={AILogo} className="logo" alt="Vite logo" />
       </div>
-      <h1>AI Assistant</h1>
+      <h1>Modern Genie</h1>
       <div className="card">
         <input
           className="input"
@@ -68,7 +76,7 @@ function App() {
         </button>
       </div>
       <div className="answer">
-        <p>{answer}</p>
+        <p ref={answerDisplay}></p>
       </div>
     </>
   );

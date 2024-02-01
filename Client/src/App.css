@@ -57,12 +57,14 @@
 .answer {
   border-radius: 8px;
   min-height: 40vh;
-  min-width: 30vw;
+  /* height: auto; */
+  width: 30vw;
   border: 1px solid;
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
   margin: 0.5rem;
+  overflow: auto;
 }
 .read-the-docs {
   color: #888;
