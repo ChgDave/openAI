@@ -33,6 +33,8 @@ body {
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+  margin: 0;
+  padding: 0.6rem;
 }
 
 button {
@@ -45,6 +47,7 @@ button {
   background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
+  margin: 0.5rem;
 }
 button:hover {
   border-color: #646cff;

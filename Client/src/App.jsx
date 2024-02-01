@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+import AILogo from "/AI.png";
 import "./App.css";
 // import { AudioContext } from "standardized-audio-context";
 
@@ -51,28 +51,25 @@ function App() {
   return (
     <>
       <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        <img src={AILogo} className="logo" alt="Vite logo" />
       </div>
-      <h1>Open AI</h1>
+      <h1>AI Assistant</h1>
       <div className="card">
         <input
+          className="input"
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyPress={handleKeyPress}
+          type="text"
+          placeholder="How can I help you?"
         ></input>
         <button ref={inputRef} onClick={() => handleClick()}>
           Submit
         </button>
+      </div>
+      <div className="answer">
         <p>{answer}</p>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   );
 }
