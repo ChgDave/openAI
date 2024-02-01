@@ -1,6 +1,6 @@
-import { useState, useRef } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+import { useState, useRef, useEffect } from "react";
+import Typewriter from "typewriter-effect/dist/core";
+import AILogo from "/AI.png";
 import "./App.css";
 // import { AudioContext } from "standardized-audio-context";
 
@@ -8,7 +8,8 @@ function App() {
   const [answer, setAnswer] = useState("");
   const [input, setInput] = useState("");
   const inputRef = useRef(null);
-  // const audioContext = new AudioContext();
+  const answerDisplay = useRef(null);
+
   const handleClick = async () => {
     const response = await fetch("http://localhost:3001/fetch-answer", {
       method: "POST",
@@ -39,6 +40,13 @@ function App() {
     // sourceNode.start();
     setInput("");
     setAnswer(answer);
+
+    const typewriter = new Typewriter(answerDisplay.current, {
+      strings: answer,
+      autoStart: true,
+      loop: false,
+      delay: 50,
+    });
   };
 
   const handleKeyPress = (event) => {
@@ -51,28 +59,25 @@ function App() {
   return (
     <>
       <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        <img src={AILogo} className="logo" alt="Vite logo" />
       </div>
-      <h1>Open AI</h1>
+      <h1>Modern Genie</h1>
       <div className="card">
         <input
+          className="input"
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyPress={handleKeyPress}
+          type="text"
+          placeholder="How can I help you?"
         ></input>
         <button ref={inputRef} onClick={() => handleClick()}>
           Submit
         </button>
-        <p>{answer}</p>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <div className="answer">
+        <p ref={answerDisplay}></p>
+      </div>
     </>
   );
 }
