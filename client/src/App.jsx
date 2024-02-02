@@ -11,7 +11,7 @@ function App() {
   const answerDisplay = useRef(null);
 
   const handleClick = async () => {
-    const response = await fetch("https://bb-88.onrender.com/fetch-answer", {
+    const response = await fetch("http://localhost:3001/fetch-answer", {
       method: "POST",
       body: JSON.stringify({ input }),
       headers: {
@@ -20,7 +20,7 @@ function App() {
     });
     const completion = await response.json();
     const answer = completion.choices[0].message.content;
-    const audioReponse = await fetch("https://bb-88.onrender.com/fetch-audio", {
+    const audioReponse = await fetch("http://localhost:3001/fetch-audio", {
       method: "POST",
       body: JSON.stringify({ input: answer }),
       headers: {
