@@ -5,11 +5,23 @@ config();
 import express from "express";
 import cors from "cors";
 
+import { fileURLToPath } from "url";
+import { dirname, join } from "path";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 const app = express();
 const port = 3001;
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
+
+app.use(express.static(join(__dirname, "client/dist")));
+app.get("*", (req, res) => {
+  res.sendFile(join(__dirname, "client/dist/index.html"));
+});
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_KEY,
