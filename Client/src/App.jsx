@@ -61,7 +61,7 @@ function App() {
       <div>
         <img src={AILogo} className="logo" alt="Vite logo" />
       </div>
-      <h1>Modern Genie</h1>
+      <h1>BB-88</h1>
       <div className="card">
         <input
           className="input"
