@@ -18,9 +18,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 
-app.use(express.static(join(__dirname, "client/")));
+app.use(express.static(join(__dirname, "client/dist")));
 app.get("*", (req, res) => {
-  res.sendFile(join(__dirname, "client/index.html"));
+  res.sendFile(join(__dirname, "client/dist/index.html"));
 });
 
 const openai = new OpenAI({
