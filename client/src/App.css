@@ -58,7 +58,7 @@
   border-radius: 8px;
   min-height: 40vh;
   /* height: auto; */
-  width: 30vw;
+  width: 60vw;
   border: 1px solid;
   padding: 0.6em 1.2em;
   font-size: 1em;
@@ -70,8 +70,8 @@
   color: #888;
 }
 
-@media screen and (min-width: 430px) {
+@media screen and (min-width: 440px) {
   .answer {
-    width: 60vw;
+    width: 30vw;
   }
 }
