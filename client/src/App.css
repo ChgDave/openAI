@@ -69,3 +69,9 @@
 .read-the-docs {
   color: #888;
 }
+
+@media screen and (min-width: 430px) {
+  .answer {
+    width: 60vw;
+  }
+}
