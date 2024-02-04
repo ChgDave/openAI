@@ -70,7 +70,7 @@
   color: #888;
 }
 
-@media screen and (min-width: 400px) {
+@media screen and (min-width: 440px) {
   .answer {
     width: 30vw;
   }
