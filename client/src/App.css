@@ -11,7 +11,7 @@
 
 .logo {
   height: 12em;
-  padding: 1.5em;
+  padding: 1em;
   will-change: filter;
   transition: filter 300ms;
 }
@@ -38,7 +38,7 @@
 }
 
 .card {
-  padding: 1em;
+  padding: 0em;
   display: flex;
   flex-direction: column;
   /* width: 10vw; */
